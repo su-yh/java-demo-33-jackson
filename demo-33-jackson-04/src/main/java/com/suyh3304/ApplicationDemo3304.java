@@ -3,7 +3,7 @@ package com.suyh3304;
 import com.suyh3304.client.FileClientConfig;
 import com.suyh3304.client.FtpFileClientConfig;
 import com.suyh3304.client.LocalFileClientConfig;
-import com.suyh3304.util.JsonUtil;
+import com.suyh3304.util.JsonUtils;
 import com.suyh3304.vo.FileConfigVo;
 
 /**
@@ -51,10 +51,10 @@ public class ApplicationDemo3304 {
         FileConfigVo vo = new FileConfigVo();
         vo.setConfig(clientConfig).setId(1L).setDeleted(Boolean.FALSE)
                 .setName("name").setRemark("remark");
-        return JsonUtil.serializable(vo);
+        return JsonUtils.serializable(vo);
     }
 
     private static FileConfigVo deserialize(String jsonValue) {
-        return JsonUtil.deserialize(jsonValue, FileConfigVo.class);
+        return JsonUtils.deserialize(jsonValue, FileConfigVo.class);
     }
 }

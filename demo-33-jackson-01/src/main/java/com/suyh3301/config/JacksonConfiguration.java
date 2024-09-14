@@ -1,7 +1,7 @@
 package com.suyh3301.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.suyh3301.util.JsonUtil;
+import com.suyh3301.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ public class JacksonConfiguration {
         log.info("ObjectMapper configuration: use JacksonConfiguration");
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
         // 使用core中的配置进行jackson设置
-        JsonUtil.initMapper(objectMapper);
+        JsonUtils.initMapper(objectMapper);
         return objectMapper;
     }
 }
