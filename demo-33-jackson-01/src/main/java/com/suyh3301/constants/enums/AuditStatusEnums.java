@@ -28,6 +28,7 @@ public enum AuditStatusEnums {
     @JsonValue
     private final int code;
 
+    // 在测试的时候，并没有添加 这个注解也可以反序列化成功
     @JsonCreator
     AuditStatusEnums(int code) {
         this.code = code;
