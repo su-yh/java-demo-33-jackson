@@ -18,6 +18,7 @@ public enum AuditStatusEnums {
     SUCCESS(3),
     @Schema(description = "4 拒绝")
     REJECTED(4),
+
     ;
 
     /**

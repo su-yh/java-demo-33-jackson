@@ -2,6 +2,7 @@ package com.suyh3301.util;
 
 import com.suyh3301.Application3301;
 import com.suyh3301.constants.enums.AuditStatusEnums;
+import com.suyh3301.entity.JacksonEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -32,12 +33,11 @@ public class JsonUtilsTest {
 
     @Test
     public void testJacksonSerializable() {
-        DataVo exportDto = new DataVo();
-        exportDto.id = 1L;
-        exportDto.auditStatus = AuditStatusEnums.SUCCESS;
-        Assertions.assertNotNull(exportDto);
-        String listJson = JsonUtils.serializable(exportDto);
-        log.info("listJson: {}", listJson);
+        JacksonEntity entity = new JacksonEntity();
+        entity.setAuditStatus(AuditStatusEnums.SUCCESS);
+        Assertions.assertNotNull(entity);
+        String jsonValue = JsonUtils.serializable(entity);
+        log.info("jsonValue: {}", jsonValue);
     }
 
     @Test
@@ -48,12 +48,8 @@ public class JsonUtilsTest {
                 "    \"auditStatus\": 3,\n" +
                 "    \"uuid\" : \"134b0850361f468ca8eec8976fffe7fc\"\n" +
                 "}";
-        DataVo vo = JsonUtils.deserialize(jsonValue, DataVo.class);
+        JacksonEntity vo = JsonUtils.deserialize(jsonValue, JacksonEntity.class);
         Assertions.assertNotNull(vo);
     }
 
-    public static class DataVo {
-        public Long id;
-        public AuditStatusEnums auditStatus;
-    }
 }

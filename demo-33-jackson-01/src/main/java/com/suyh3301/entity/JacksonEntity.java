@@ -1,5 +1,6 @@
 package com.suyh3301.entity;
 
+import com.suyh3301.constants.enums.AuditStatusEnums;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,4 +12,5 @@ public class JacksonEntity implements Serializable {
     private Integer age;
     private Date birth;
     private Long nullVar;
+    private AuditStatusEnums auditStatus;
 }
