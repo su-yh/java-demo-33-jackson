@@ -1,5 +1,6 @@
 package com.suyh3301.constants.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public enum AuditStatusEnums {
     @JsonValue
     private final int code;
 
+    @JsonCreator
     AuditStatusEnums(int code) {
         this.code = code;
     }

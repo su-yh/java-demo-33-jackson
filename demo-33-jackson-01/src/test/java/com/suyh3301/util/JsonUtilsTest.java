@@ -37,7 +37,7 @@ public class JsonUtilsTest {
         entity.setAuditStatus(AuditStatusEnums.SUCCESS);
         Assertions.assertNotNull(entity);
         String jsonValue = JsonUtils.serializable(entity);
-        log.info("jsonValue: {}", jsonValue);
+        log.info("serializable jsonValue: {}", jsonValue);
     }
 
     @Test
@@ -50,6 +50,8 @@ public class JsonUtilsTest {
                 "}";
         JacksonEntity vo = JsonUtils.deserialize(jsonValue, JacksonEntity.class);
         Assertions.assertNotNull(vo);
+        log.info("deserialize, enums value: {}", vo.getAuditStatus());
+        Assertions.assertEquals(AuditStatusEnums.SUCCESS, vo.getAuditStatus());
     }
 
 }
