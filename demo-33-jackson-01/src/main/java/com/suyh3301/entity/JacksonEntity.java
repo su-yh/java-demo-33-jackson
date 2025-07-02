@@ -13,4 +13,5 @@ public class JacksonEntity implements Serializable {
     private Date birth;
     private Long nullVar;
     private AuditStatusEnums auditStatus;
+    private AuditStatusEnums unknown;
 }

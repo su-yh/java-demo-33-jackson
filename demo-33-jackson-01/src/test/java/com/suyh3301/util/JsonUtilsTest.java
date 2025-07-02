@@ -1,5 +1,6 @@
 package com.suyh3301.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.suyh3301.Application3301;
 import com.suyh3301.constants.enums.AuditStatusEnums;
 import com.suyh3301.entity.JacksonEntity;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.annotation.Resource;
+
 /**
  * @author suyh
  * @since 2025-07-02
@@ -23,6 +26,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Slf4j
 public class JsonUtilsTest {
+    @Resource
+    private ObjectMapper objectMapper;
+
     @BeforeAll
     public static void setUpAll() {
     }
@@ -33,11 +39,18 @@ public class JsonUtilsTest {
 
     @Test
     public void testJacksonSerializable() {
-        JacksonEntity entity = new JacksonEntity();
-        entity.setAuditStatus(AuditStatusEnums.SUCCESS);
-        Assertions.assertNotNull(entity);
-        String jsonValue = JsonUtils.serializable(entity);
-        log.info("serializable jsonValue: {}", jsonValue);
+        {
+            String jsonValue = JsonUtils.serializable(AuditStatusEnums.NORMAL, objectMapper);
+            log.info("serializable jsonValue: {}", jsonValue);
+            Assertions.assertNotNull(jsonValue);
+            Assertions.assertEquals(AuditStatusEnums.NORMAL.getCode() + "", jsonValue);
+        }
+
+        {
+            String jsonValue = JsonUtils.serializable(AuditStatusEnums.UNKNOWN, objectMapper);
+            log.info("serializable jsonValue: {}", jsonValue);
+            Assertions.assertNull(jsonValue);
+        }
     }
 
     @Test
