@@ -36,7 +36,7 @@ public class JacksonBuilderCustomizer implements Jackson2ObjectMapperBuilderCust
             }
 
             {
-                // 对于spring的 jackson 需要与前端交互的，对枚举的序列化需要做额外的特殊处理。
+                // 对于spring的 jackson 需要与前端交互的，对枚举的序列化需要做增强处理。
                 SimpleModule module = new SimpleModule();
                 module.setSerializerModifier(EnhancedEnumSerializer.buildModifier());
                 mapper.registerModule(module);

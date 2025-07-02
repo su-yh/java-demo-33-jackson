@@ -39,7 +39,9 @@ public class JsonUtilsTest {
 
     @Test
     public void testJacksonSerializable() {
+        // 使用spring boot 的 ObjectMapper
         {
+            // @JsonValue 的效果
             String jsonValue = JsonUtils.serializable(AuditStatusEnums.NORMAL, objectMapper);
             log.info("serializable jsonValue: {}", jsonValue);
             Assertions.assertNotNull(jsonValue);
@@ -47,6 +49,7 @@ public class JsonUtilsTest {
         }
 
         {
+            // @JsonIgnore 的效果
             String jsonValue = JsonUtils.serializable(AuditStatusEnums.UNKNOWN, objectMapper);
             log.info("serializable jsonValue: {}", jsonValue);
             if (jsonValue != null) {
@@ -57,8 +60,9 @@ public class JsonUtilsTest {
 
         }
 
-        // 直接使用jsonUtils ######################################
+        // 使用jsonUtils 的objectMapper
         {
+            // @JsonValue 的效果
             String jsonValue = JsonUtils.serializable(AuditStatusEnums.NORMAL);
             log.info("serializable jsonValue: {}", jsonValue);
             Assertions.assertNotNull(jsonValue);
@@ -66,6 +70,7 @@ public class JsonUtilsTest {
         }
 
         {
+            // @JsonIgnore 的效果
             String jsonValue = JsonUtils.serializable(AuditStatusEnums.UNKNOWN);
             log.info("serializable jsonValue: {}", jsonValue);
             Assertions.assertEquals(AuditStatusEnums.UNKNOWN.getCode() + "", jsonValue);
