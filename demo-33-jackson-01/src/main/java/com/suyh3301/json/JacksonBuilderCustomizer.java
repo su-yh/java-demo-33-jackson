@@ -3,6 +3,7 @@ package com.suyh3301.json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.suyh3301.json.serialize.EnhancedEnumSerializer;
 import com.suyh3301.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -31,8 +32,10 @@ public class JacksonBuilderCustomizer implements Jackson2ObjectMapperBuilderCust
             // 同步 JsonUtils 与web 中使用的jackson 一致
             JsonUtils.initMapper(utilMapper);
 
-            // 如果对spring 中的jackson 的特别的处理，可以对原来的mapper 追加配置。
-            // mapper.registerModules();
+            // 对于spring的 jackson 需要与前端交互的，对枚举的序列化需要做额外的特殊处理。
+            SimpleModule module = new SimpleModule();
+            module.setSerializerModifier(EnhancedEnumSerializer.buildModifier());
+            mapper.registerModule(module);
         });
     }
 }
