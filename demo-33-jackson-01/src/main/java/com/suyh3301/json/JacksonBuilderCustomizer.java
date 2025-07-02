@@ -27,15 +27,20 @@ public class JacksonBuilderCustomizer implements Jackson2ObjectMapperBuilderCust
 
         // 它的时机是在所有配置都完成之后，最后调用。
         builder.postConfigurer(mapper -> {
-            log.info("init json utils.");
-            ObjectMapper utilMapper = mapper.copy();
-            // 同步 JsonUtils 与web 中使用的jackson 一致
-            JsonUtils.initMapper(utilMapper);
+            {
+                log.info("init json utils.");
+                ObjectMapper utilMapper = mapper.copy();
 
-            // 对于spring的 jackson 需要与前端交互的，对枚举的序列化需要做额外的特殊处理。
-            SimpleModule module = new SimpleModule();
-            module.setSerializerModifier(EnhancedEnumSerializer.buildModifier());
-            mapper.registerModule(module);
+                // 同步 JsonUtils 与web 中使用的jackson 一致
+                JsonUtils.initMapper(utilMapper);
+            }
+
+            {
+                // 对于spring的 jackson 需要与前端交互的，对枚举的序列化需要做额外的特殊处理。
+                SimpleModule module = new SimpleModule();
+                module.setSerializerModifier(EnhancedEnumSerializer.buildModifier());
+                mapper.registerModule(module);
+            }
         });
     }
 }

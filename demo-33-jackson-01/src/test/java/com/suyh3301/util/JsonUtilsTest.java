@@ -56,6 +56,20 @@ public class JsonUtilsTest {
             }
 
         }
+
+        // 直接使用jsonUtils ######################################
+        {
+            String jsonValue = JsonUtils.serializable(AuditStatusEnums.NORMAL);
+            log.info("serializable jsonValue: {}", jsonValue);
+            Assertions.assertNotNull(jsonValue);
+            Assertions.assertEquals(AuditStatusEnums.NORMAL.getCode() + "", jsonValue);
+        }
+
+        {
+            String jsonValue = JsonUtils.serializable(AuditStatusEnums.UNKNOWN);
+            log.info("serializable jsonValue: {}", jsonValue);
+            Assertions.assertEquals(AuditStatusEnums.UNKNOWN.getCode() + "", jsonValue);
+        }
     }
 
     @Test
