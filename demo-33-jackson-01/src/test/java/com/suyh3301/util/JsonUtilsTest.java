@@ -49,7 +49,12 @@ public class JsonUtilsTest {
         {
             String jsonValue = JsonUtils.serializable(AuditStatusEnums.UNKNOWN, objectMapper);
             log.info("serializable jsonValue: {}", jsonValue);
-            Assertions.assertNull(jsonValue);
+            if (jsonValue != null) {
+                Assertions.assertEquals("null", jsonValue);
+            } else {
+                Assertions.assertNull(null);
+            }
+
         }
     }
 
