@@ -3,13 +3,9 @@ spring:
   jackson:
     # 配置对默认的@RequestBody和@ResponseBody的json配置
     # 这样我们就不需要在每一个日期上面添加@format 注解就可以将其按下面的配置进行格式化
-    date-format: yyyy-MM-dd HH:mm:ss.SSS
-    # 时区的配置有两种方式，如下。第二种 方式 ，参考: ZoneId
-    # ZoneId.systemDefault()  可以取到系统默认时区
-    # Locale.getDefault() 可以取到系统默认位置，这个也包括了语言信息了
-#    time-zone: GMT+8
-#    time-zone: Asia/Kolkata  # 印度
-    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 与main 方法中写死的时区一致
+    time-zone: Asia/Kolkata
     default-property-inclusion: non_null # 非空属性才序列化
     deserialization:
       fail-on-unknown-properties: false # 未知key 在反序列化时不抛异常
@@ -18,12 +14,11 @@ spring:
       indent-output: true
       # 忽略无法转换的对象
       fail-on-empty-beans: false
-      # 序列化时，是否使用时间戳进行序列化
-      # boolean writeDatesAsTimestamps = objectMapper.isEnabled(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
       # 序列化时，使用时间戳的格式 进行序列化，而不是字符串。
-      # write-dates-as-timestamps: true
+      write-dates-as-timestamps: false
     parser:
       # 允许出现特殊字符和转义符
       allow-unquoted-control-chars: true
       # 允许出现单引号
       allow-single-quotes: true
+
